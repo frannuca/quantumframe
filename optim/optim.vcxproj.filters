@@ -13,12 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="x64">
+      <UniqueIdentifier>{f4cbce0b-836b-41fc-8eff-fde0be941815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="x32">
+      <UniqueIdentifier>{4a6abb33-0ef4-4ca3-8ba4-ba039ccd7ab6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exports_optim.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Algorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="armadillo.h">
@@ -27,16 +30,49 @@
     <ClInclude Include="derivatives.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="convexoptimizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\nlopt.h">
+      <Filter>x64</Filter>
+    </ClInclude>
+    <ClInclude Include="x32\nlopt.h">
+      <Filter>x32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algorithm.cpp">
+    <ClCompile Include="derivatives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="derivatives.cpp">
+    <ClCompile Include="convexoptimizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="x64\libnlopt-0.dll">
+      <Filter>x64</Filter>
+    </None>
+    <None Include="x64\libnlopt-0.def">
+      <Filter>x64</Filter>
+    </None>
+    <None Include="x64\COPYRIGHT">
+      <Filter>x64</Filter>
+    </None>
+    <None Include="x64\COPYING">
+      <Filter>x64</Filter>
+    </None>
+    <None Include="x32\libnlopt-0.dll">
+      <Filter>x32</Filter>
+    </None>
+    <None Include="x32\libnlopt-0.def">
+      <Filter>x32</Filter>
+    </None>
+    <None Include="x32\COPYRIGHT">
+      <Filter>x32</Filter>
+    </None>
+    <None Include="x32\COPYING">
+      <Filter>x32</Filter>
+    </None>
   </ItemGroup>
 </Project>
