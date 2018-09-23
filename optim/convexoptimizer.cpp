@@ -7,24 +7,25 @@ namespace
 	class ConvexOptimizerImp :public optim::IConvexOptimizer
 	{
 	public:
-		function_t*  _feval;
-		std::vector<std::pair<function_t* , void*>> eq_constraints;
-		std::vector<std::pair<function_t*, void*>> ineq_constraints;
+		std::shared_ptr<FunctionData> _feval;
+		double ftol;
+		std::vector<std::shared_ptr<FunctionData>> eq_constraints;
+		std::vector<std::shared_ptr<FunctionData>> ineq_constraints;
 		std::vector<double> up_limits;
-		std::vector<double> down_limits;		
+		std::vector<double> down_limits;
 		int nlopt_method;
-		
-		ConvexOptimizerResult mimimize(int niter, std::vector<double> xstart,void * data) override;
+			
+		ConvexOptimizerResult mimimize(int niter, std::vector<double> xstart) override;
 	};
 
-	optim::IConvexOptimizer::ConvexOptimizerResult ConvexOptimizerImp::mimimize(int niter, std::vector<double> xstart, void * data)
+	optim::IConvexOptimizer::ConvexOptimizerResult ConvexOptimizerImp::mimimize(int niter, std::vector<double> xstart)
 	{					
 		nlopt_opt opt = nlopt_create(static_cast<nlopt_algorithm>(nlopt_method), xstart.size());
 								
-		nlopt_set_min_objective(opt, _feval, nullptr);
 		
-		nlopt_set_xtol_rel(opt, 1e-4);
+		nlopt_set_min_objective(opt, _feval.get()->func, _feval.get()->pdata);
 		
+		nlopt_set_ftol_abs(opt, _feval.get()->ftol);		
 		nlopt_set_maxeval(opt, niter);
 		
 		
@@ -39,10 +40,10 @@ namespace
 		}
 
 		
-		for (auto c : eq_constraints) { nlopt_add_equality_constraint(opt, c.first, c.second, 1e-3); }
+		for (auto c : eq_constraints) { nlopt_add_equality_constraint(opt, c.get()->func, c.get()->pdata, c.get()->ftol); }
 		
 
-		for (auto c : ineq_constraints){nlopt_add_inequality_constraint(opt, c.first, c.second, 1e-3);}
+		for (auto c : ineq_constraints){nlopt_add_inequality_constraint(opt, c.get()->func, c.get()->pdata, c.get()->ftol);}
 
 		std::vector<double> x = xstart;
 		double minf; /* `*`the` `minimum` `objective` `value,` `upon` `return`*` */
@@ -55,7 +56,7 @@ namespace
 
 		ConvexOptimizerResult result;
 		result.error=minf;
-		result.feval = _feval(x.size(), &x[0], nullptr, data);
+		result.feval = _feval.get()->func(x.size(), &x[0], nullptr, _feval.get()->pdata);
 		result.solution = x;
 		return result;
 	}
@@ -65,14 +66,14 @@ optim::IConvexOptimizer::~IConvexOptimizer()
 {
 }
 
-optim::ConvexOptimizerBuilder::ConvexOptimizerBuilder()
-{
-}
 
-optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withFitnessFunction(IConvexOptimizer::function_t* f)
+optim::ConvexOptimizerBuilder::ConvexOptimizerBuilder(IConvexOptimizer::function_t* f, void* pdata, double tol)
 {
-	_feval = f;
-	return *this;
+	auto p = new IConvexOptimizer::FunctionData();
+	p->ftol = tol;
+	p->pdata = pdata;
+	p->func = f;
+	_feval.reset(p);
 }
 
 optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withLowerBounds(std::vector<double> lb)
@@ -87,15 +88,25 @@ optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withUpperBounds(st
 	return *this;
 }
 
-optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withEquallyConstraint(IConvexOptimizer::function_t* fconstraint, void *value)
+optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withEquallyConstraint(IConvexOptimizer::function_t*  fconstraint, void* pdata, double tol)
 {
-	eq_constraints.push_back(std::make_pair(fconstraint, value));
+	auto p = new IConvexOptimizer::FunctionData();
+	p->ftol = tol;
+	p->pdata = pdata;
+	p->func = fconstraint;
+	
+	eq_constraints.push_back(std::unique_ptr<IConvexOptimizer::FunctionData>(p));
 	return *this;
 }
 
-optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withInEquallyConstraint(IConvexOptimizer::function_t*  fconstraint, void *value)
+optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withInEquallyConstraint(IConvexOptimizer::function_t*  fconstraint, void* pdata, double tol)
 {
-	ineq_constraints.push_back(std::make_pair(fconstraint, value));
+	auto p = new IConvexOptimizer::FunctionData();
+	p->ftol = tol;
+	p->pdata = pdata;
+	p->func = fconstraint;
+
+	ineq_constraints.push_back(std::unique_ptr<IConvexOptimizer::FunctionData>(p));
 	return *this;
 }
 
@@ -120,14 +131,16 @@ optim::ConvexOptimizerBuilder& optim::ConvexOptimizerBuilder::withMethod(OPTMETH
 	return *this;
 }
 
-std::unique_ptr<optim::IConvexOptimizer> optim::ConvexOptimizerBuilder::Build()
+std::unique_ptr<optim::IConvexOptimizer> optim::ConvexOptimizerBuilder::Build() const
 {
 	auto o = new ConvexOptimizerImp();
+	o->ftol = ftol.value_or(1e-8);
+	o->nlopt_method = nlopt_method.value_or(NLOPT_LN_COBYLA);
 	o->up_limits = up_limits;
 	o->down_limits = down_limits;
 	o->eq_constraints = eq_constraints;
 	o->ineq_constraints = ineq_constraints;
 	o->nlopt_method = nlopt_method.value_or(NLOPT_LN_COBYLA);
-	o->_feval = _feval.value();		
+	o->_feval = _feval;		
 	return std::unique_ptr<IConvexOptimizer>(o);
 }

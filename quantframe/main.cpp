@@ -39,14 +39,13 @@ int main()
 		return sqrt(x[1]);
 	};
 
-	optim::ConvexOptimizerBuilder builder;
-	auto opt = builder
-		.withFitnessFunction(myfunc)
-		.withInEquallyConstraint(myconstraint, &data[0])
-		.withInEquallyConstraint(myconstraint, &data[1])
+	optim::ConvexOptimizerBuilder builder(myfunc,data,1e-8);
+	auto opt = builder		
+		.withInEquallyConstraint(myconstraint, &data[0],1e-6)
+		.withInEquallyConstraint(myconstraint, &data[1], 1e-6)
 		.withLowerBounds({ -100000.0,0 })		
 		.withMethod(optim::ConvexOptimizerBuilder::OPTMETHOD::SLSQP).Build();
-	opt->mimimize(100, { 1.234, 5.678 }, data);
+	opt->mimimize(100, { 1.234, 5.678 });
 	return 0;
 }
 //using namespace arma;
