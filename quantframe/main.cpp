@@ -48,6 +48,7 @@ int main()
 
 	double dc365 = act365F->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double yc365 = act365F->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
+	//
 
 }
 
