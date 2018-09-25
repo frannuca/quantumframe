@@ -39,12 +39,18 @@
     <ClInclude Include="x32\nlopt.h">
       <Filter>x32</Filter>
     </ClInclude>
+    <ClInclude Include="CDSPricer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="derivatives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="convexoptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDSPricer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

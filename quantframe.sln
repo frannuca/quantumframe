@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quantframe", "quantframe\qu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optim", "optim\optim.vcxproj", "{08F5426C-0653-4B70-8EE2-62271AE17D8E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "time\time.vcxproj", "{66845D8E-FBFA-467A-AA4D-8EA9112E6980}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{08F5426C-0653-4B70-8EE2-62271AE17D8E}.Debug|x64.Build.0 = Debug|x64
 		{08F5426C-0653-4B70-8EE2-62271AE17D8E}.Release|x64.ActiveCfg = Release|x64
 		{08F5426C-0653-4B70-8EE2-62271AE17D8E}.Release|x64.Build.0 = Release|x64
+		{66845D8E-FBFA-467A-AA4D-8EA9112E6980}.Debug|x64.ActiveCfg = Debug|x64
+		{66845D8E-FBFA-467A-AA4D-8EA9112E6980}.Debug|x64.Build.0 = Debug|x64
+		{66845D8E-FBFA-467A-AA4D-8EA9112E6980}.Release|x64.ActiveCfg = Release|x64
+		{66845D8E-FBFA-467A-AA4D-8EA9112E6980}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

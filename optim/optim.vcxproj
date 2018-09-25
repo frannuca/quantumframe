@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CDSPricer.h" />
     <ClInclude Include="convexoptimizer.h" />
     <ClInclude Include="armadillo.h" />
     <ClInclude Include="derivatives.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="x64\nlopt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CDSPricer.cpp" />
     <ClCompile Include="convexoptimizer.cpp" />
     <ClCompile Include="derivatives.cpp" />
   </ItemGroup>
