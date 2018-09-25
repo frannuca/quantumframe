@@ -41,5 +41,24 @@ namespace termstructure
 		double yearfraction(const QDate& d1, const QDate& d2) override;
 
 	};
+
+	class EXPORT_TSTRUCT Thirty360 :public DayCounter
+	{
+
+	public:
+		enum class CONVENTION {USA=0, BONDBASIS, EUROPEAN, EUROBONDBASIS, ITALIAN, GERMAN};
+		Thirty360() = delete;
+		Thirty360(CONVENTION c, bool isLastPeriod);
+		std::string name() override;
+		double dayCount(const QDate& d1, const QDate& d2) override;
+		double yearfraction(const QDate& d1, const QDate& d2) override;
+
+	private:
+		std::function<double(const QDate&, const QDate&)> daycount_functor;
+		CONVENTION _convention;
+		bool _isLastPeriod;
+	};
+
+
 	
 }

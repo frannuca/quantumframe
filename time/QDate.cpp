@@ -137,6 +137,14 @@ time_t termstructure::QDate::toEpoch() const
 	return time_t(secs);
 }
 
+bool termstructure::QDate::isLeapYear(int year)
+{
+	bool cond1 = year % 4 == 0 && year % 100 == 0 && year % 400;	
+	bool cond2 = year % 4 == 0 && year % 100 != 0;
+
+	return cond1 || cond2;
+}
+
 const std::locale fmt(std::locale::classic(),
 	new boost::gregorian::date_facet("%m/%d/%Y"));
 
