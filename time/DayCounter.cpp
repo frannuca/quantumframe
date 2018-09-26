@@ -3,7 +3,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace termstructure
+namespace qtime
 {
 	DayCounter::DayCounter()
 	{
@@ -117,7 +117,7 @@ namespace termstructure
 				std::max(0, 30 - dd1) + std::min(30, dd2);
 			};
 			break;
-		case(CONVENTION::GERMAN): 
+		case(CONVENTION::GERMAN): this->daycount_functor =
 			[this](const QDate& d1, const QDate& d2)
 			{
 				int dd1 = d1.DayOfTheMonth(), dd2 = d2.DayOfTheMonth();

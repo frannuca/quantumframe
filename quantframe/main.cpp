@@ -19,7 +19,7 @@ typedef struct {
 
 int main()
 {
-	using namespace termstructure;
+	using namespace qtime;
 
 	QDate d1(10, 05, 2019);
 	auto m = d1.Month();
@@ -42,6 +42,10 @@ int main()
 
 	std::unique_ptr<DayCounter> act360(new Actual360(true));
 	std::unique_ptr<DayCounter> act365F(new Actual365fixed());
+	std::unique_ptr<DayCounter> thirty360_us(new Thirty360(Thirty360::CONVENTION::USA,true));
+	std::unique_ptr<DayCounter> thirty360_eu(new Thirty360(Thirty360::CONVENTION::EUROBONDBASIS, true));
+	std::unique_ptr<DayCounter> thirty360_deu(new Thirty360(Thirty360::CONVENTION::GERMAN, true));
+	std::unique_ptr<DayCounter> thirty360_ita(new Thirty360(Thirty360::CONVENTION::ITALIAN, true));
 
 	double dc360 = act360->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double yc360 = act360->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
@@ -49,6 +53,10 @@ int main()
 	double dc365 = act365F->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double yc365 = act365F->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	//
+	double t360_us = thirty360_us->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
+	double t360_eu = thirty360_eu->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
+	double t360_deu = thirty360_deu->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
+	double t360_ita = thirty360_ita->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
 
 }
 

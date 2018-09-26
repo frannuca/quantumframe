@@ -1,6 +1,6 @@
 #include "Calendar.h"
 
-namespace termstructure {
+namespace qtime {
 	Calendar::Calendar()
 	{
 	}

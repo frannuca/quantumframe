@@ -5,7 +5,7 @@
 #include "Calendar.h"
 #include <memory>
 
-namespace termstructure
+namespace qtime
 {
 	class EXPORT_TSTRUCT DayCounter
 	{		

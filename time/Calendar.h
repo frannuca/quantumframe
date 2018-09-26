@@ -5,7 +5,7 @@
 #include "QDate.h"
 
 
-namespace termstructure {
+namespace qtime {
 
 	class EXPORT_TSTRUCT Calendar {
 	public:

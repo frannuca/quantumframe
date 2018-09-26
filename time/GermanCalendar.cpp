@@ -1,11 +1,11 @@
 #include "GermanCalendar.h"
 #include "CalendarCommons.h"
 
-termstructure::GermanCalendar::GermanCalendar()
+qtime::GermanCalendar::GermanCalendar()
 {
 }
 
-bool termstructure::GermanCalendar::isBankHoliday(const termstructure::QDate& date) {
+bool qtime::GermanCalendar::isBankHoliday(const qtime::QDate& date) {
 	
 
 	int d = date.DayOfTheMonth();

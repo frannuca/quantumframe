@@ -5,7 +5,7 @@
 #include "CalendarCommons.h"
 namespace boost { namespace gregorian{ class date; } }
 
-namespace termstructure {
+namespace qtime {
 	
 class EXPORT_TSTRUCT QDate {
 protected:

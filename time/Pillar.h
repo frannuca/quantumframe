@@ -1,7 +1,7 @@
 #pragma once
 #include "exports_termstructure.h"
 #include "QDate.h"
-namespace termstructure
+namespace qtime
 {
 	template<typename T>
 	struct Pillar
