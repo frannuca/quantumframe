@@ -13,6 +13,8 @@
 #include "../time/Calendar.h"
 #include "../time/GermanCalendar.h"
 #include "../time/DayCounter.h"
+#include "../time/tenor.h"
+#include "../instrument/Instrument.h"
 typedef struct {
 	double a, b;
 } my_constraint_data;
@@ -20,6 +22,20 @@ typedef struct {
 int main()
 {
 	using namespace qtime;
+	using namespace literals;
+
+	using namespace instrument;
+	CashFlow cashflow (3.0_months, 100e6);
+	auto nom = cashflow.nominal;
+	
+	auto tncf = cashflow.tenor;
+	Tenor<SWEEK> w = 7;
+	auto w2 = w * 2;
+	Tenor<SYEAR> y8 = 3.0_years + 5.0_years;
+	Tenor<SMONTH> m3 = 1.0_months+ 5.0_months;
+	auto pm3 = m3 * 5;
+	auto pm3b = pm3 / 5;
+	bool okp = m3 == pm3b;
 
 	QDate d1(10, 05, 2019);
 	auto m = d1.Month();
@@ -46,6 +62,7 @@ int main()
 	std::unique_ptr<DayCounter> thirty360_eu(new Thirty360(Thirty360::CONVENTION::EUROBONDBASIS, true));
 	std::unique_ptr<DayCounter> thirty360_deu(new Thirty360(Thirty360::CONVENTION::GERMAN, true));
 	std::unique_ptr<DayCounter> thirty360_ita(new Thirty360(Thirty360::CONVENTION::ITALIAN, true));
+	std::unique_ptr<SimpleDayCounter> simpledc(new SimpleDayCounter());
 
 	double dc360 = act360->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double yc360 = act360->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
@@ -57,6 +74,12 @@ int main()
 	double t360_eu = thirty360_eu->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double t360_deu = thirty360_deu->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
 	double t360_ita = thirty360_ita->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
+
+	double tsc = simpledc->dayCount(QDate(01, 01, 2018), QDate(01, 01, 2019));
+	double tyf = simpledc->yearfraction(QDate(01, 01, 2018), QDate(01, 01, 2019));
+
+	QDate endofmonth(30, 06, 2018);
+	bool ismonthend = endofmonth.IsMonthEnd();
 
 }
 

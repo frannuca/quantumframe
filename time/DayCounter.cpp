@@ -171,4 +171,37 @@ namespace qtime
 	{
 		return dayCount(d1, d2) / 360.0;
 	}
+
+	SimpleDayCounter::SimpleDayCounter()
+	{
+		fallback.reset(new Thirty360(Thirty360::CONVENTION::EUROBONDBASIS, false));
+	}
+
+	std::string SimpleDayCounter::name()
+	{
+		return "SimpleDayCounter";
+	}
+
+	double SimpleDayCounter::dayCount(const QDate& d1, const QDate& d2)
+	{
+		return fallback->dayCount(d1, d2);
+	}
+
+	double SimpleDayCounter::yearfraction(const QDate& d1, const QDate& d2)
+	{
+		int dm1 = d1.DayOfTheMonth();
+		int dm2 = d2.DayOfTheMonth();
+
+		if (dm1 == dm2 ||
+			// e.g., Aug 30 -> Feb 28 ?
+			(dm1 > dm2 && d2.IsMonthEnd()) ||
+			// e.g., Feb 28 -> Aug 30 ?
+			(dm1 < dm2 && d1.IsMonthEnd())) {
+			return (d2.Year() - d1.Year()) +
+				(int(d2.Month()) - int(d1.Month())) / 12.0;
+		}
+		else {
+			return fallback->yearfraction(d1, d2);
+		}
+	}
 }

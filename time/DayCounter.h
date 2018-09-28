@@ -59,6 +59,17 @@ namespace qtime
 		bool _isLastPeriod;
 	};
 
+	class EXPORT_TSTRUCT SimpleDayCounter :public DayCounter
+	{
+
+	public:		
+		SimpleDayCounter();		
+		std::string name() override;
+		double dayCount(const QDate& d1, const QDate& d2) override;
+		double yearfraction(const QDate& d1, const QDate& d2) override;
+	private:
+		std::unique_ptr<DayCounter> fallback;
+	};
 
 	
 }

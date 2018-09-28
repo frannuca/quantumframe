@@ -80,6 +80,13 @@ bool qtime::QDate::IsWeekend() const
 	return dw == WEEKDAY::SATURDAY || dw == WEEKDAY::SUNDAY;
 }
 
+bool qtime::QDate::IsMonthEnd() const
+{
+	auto de = boost::gregorian::gregorian_calendar::end_of_month_day(_d->year(), _d->month());
+	auto td = _d->day();
+	return td == de;
+}
+
 qtime::MONTH qtime::QDate::Month() const
 {
 	auto m = _d->month().as_enum();	
@@ -161,3 +168,4 @@ std::ostream&  qtime::operator<<(std::ostream& os, const qtime::QDate& dt) {
 	return os;
 }
 
+const qtime::QDate qtime::QDate::ZERO = QDate(01, 01, 1900);

@@ -98,6 +98,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +151,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,12 +168,14 @@
     <ClInclude Include="GermanCalendar.h" />
     <ClInclude Include="Pillar.h" />
     <ClInclude Include="QDate.h" />
+    <ClInclude Include="tenor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="DayCounter.cpp" />
     <ClCompile Include="GermanCalendar.cpp" />
     <ClCompile Include="QDate.cpp" />
+    <ClCompile Include="tenor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

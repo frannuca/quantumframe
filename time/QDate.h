@@ -25,6 +25,7 @@ public:
 	int DayOfTheMonth() const;
 	int DayOfYear() const;
 	bool IsWeekend() const;
+	bool IsMonthEnd() const;
 	MONTH Month() const;
 	int Year() const;
 	//dtor
@@ -43,6 +44,7 @@ public:
 	time_t toEpoch() const;
 
 	static bool isLeapYear(int year);
+	const static QDate ZERO;
 	friend EXPORT_TSTRUCT std::ostream&  operator<<(std::ostream& os, const QDate& dt);
 	
 };

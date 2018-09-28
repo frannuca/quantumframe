@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -85,6 +85,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>BOOST_ALL_DYN_LINK;EXPMODULE_PRICING;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -117,6 +119,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>BOOST_ALL_DYN_LINK;EXPMODULE_PRICING;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -125,6 +129,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="export_pricers.h" />
+    <ClInclude Include="MarketData.h" />
+    <ClInclude Include="IPricer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IPricer.cpp" />
+    <ClCompile Include="MarketData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\optim\optim.vcxproj">
+      <Project>{08f5426c-0653-4b70-8ee2-62271ae17d8e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\time\time.vcxproj">
+      <Project>{66845d8e-fbfa-467a-aa4d-8ea9112e6980}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

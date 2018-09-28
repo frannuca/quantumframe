@@ -36,6 +36,9 @@
     <ClInclude Include="DayCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tenor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calendar.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DayCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tenor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

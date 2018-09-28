@@ -15,24 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="IPricer.h">
+    <ClInclude Include="Instrument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="export_pricers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MarketData.h">
+    <ClInclude Include="export_instruments.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IPricer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MarketData.cpp">
+    <ClCompile Include="Instrument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
