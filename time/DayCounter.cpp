@@ -29,6 +29,11 @@ namespace qtime
 		return dayCount(d1,d2) / 360.0;
 	}
 
+	double Actual360::daysperyear()
+	{
+		return 360;
+	}
+
 	Actual365fixed::Actual365fixed()
 	{
 	}
@@ -74,6 +79,11 @@ namespace qtime
 	double Actual365fixed::yearfraction(const QDate& d1, const QDate& d2)
 	{
 		return dayCount(d1, d2) / 365.0;		
+	}
+
+	double Actual365fixed::daysperyear()
+	{
+		return 365;
 	}
 
 	Thirty360::Thirty360(CONVENTION c, bool isLastPeriod):_convention(c),_isLastPeriod(isLastPeriod)
@@ -172,6 +182,11 @@ namespace qtime
 		return dayCount(d1, d2) / 360.0;
 	}
 
+	double Thirty360::daysperyear()
+	{
+		return 360;
+	}
+
 	SimpleDayCounter::SimpleDayCounter()
 	{
 		fallback.reset(new Thirty360(Thirty360::CONVENTION::EUROBONDBASIS, false));
@@ -203,5 +218,10 @@ namespace qtime
 		else {
 			return fallback->yearfraction(d1, d2);
 		}
+	}
+
+	double SimpleDayCounter::daysperyear()
+	{
+		return 360;
 	}
 }

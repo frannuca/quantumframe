@@ -132,6 +132,14 @@
   <ItemGroup>
     <ClCompile Include="YieldCurve.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\instrument\instrument.vcxproj">
+      <Project>{1881b6e3-093c-4252-b359-56a588d8bad2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\time\time.vcxproj">
+      <Project>{66845d8e-fbfa-467a-aa4d-8ea9112e6980}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

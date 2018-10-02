@@ -16,6 +16,7 @@ namespace qtime
 		virtual std::string name() = 0;
 		virtual double dayCount(const QDate& d1, const QDate& d2) = 0;
 		virtual double yearfraction(const QDate& d1, const QDate& d2) = 0;
+		virtual double daysperyear() = 0;		
 	};
 
 	class EXPORT_TSTRUCT Actual360 :public DayCounter
@@ -29,6 +30,7 @@ namespace qtime
 		double dayCount(const QDate& d1, const QDate& d2) override;
 		double yearfraction(const QDate& d1, const QDate& d2) override;
 
+		double daysperyear() override;
 	};
 
 	class EXPORT_TSTRUCT Actual365fixed :public DayCounter
@@ -40,6 +42,7 @@ namespace qtime
 		double dayCount(const QDate& d1, const QDate& d2) override;
 		double yearfraction(const QDate& d1, const QDate& d2) override;
 
+		double daysperyear() override;
 	};
 
 	class EXPORT_TSTRUCT Thirty360 :public DayCounter
@@ -53,6 +56,7 @@ namespace qtime
 		double dayCount(const QDate& d1, const QDate& d2) override;
 		double yearfraction(const QDate& d1, const QDate& d2) override;
 
+		double daysperyear() override;
 	private:
 		std::function<double(const QDate&, const QDate&)> daycount_functor;
 		CONVENTION _convention;
@@ -67,6 +71,7 @@ namespace qtime
 		std::string name() override;
 		double dayCount(const QDate& d1, const QDate& d2) override;
 		double yearfraction(const QDate& d1, const QDate& d2) override;
+		double daysperyear() override;
 	private:
 		std::unique_ptr<DayCounter> fallback;
 	};

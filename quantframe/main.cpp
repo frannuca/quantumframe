@@ -25,7 +25,7 @@ int main()
 	using namespace literals;
 
 	using namespace instrument;
-	CashFlow cashflow (3.0_months, 100e6);
+	CashFlow cashflow (QDate(01,01,2020), 3.0_months, 100e6);
 	auto nom = cashflow.nominal;
 	
 	auto tncf = cashflow.tenor;
